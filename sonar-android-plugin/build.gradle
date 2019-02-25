@@ -16,6 +16,8 @@ dependencies {
     implementation("org.codehaus.sonar-plugins.java:sonar-java-plugin:$versions.sonarJava") { transitive = false }
     implementation("org.codehaus.staxmate:staxmate:$versions.staxmate") { transitive = false }
     implementation "org.slf4j:slf4j-api:$versions.slf4j"
+    
+    testImplementation "junit:junit:$versions.junit"
 }
 
 compileKotlin {
