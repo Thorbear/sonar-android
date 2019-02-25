@@ -4,6 +4,8 @@
 This plugin enhances the Java Plugin by providing the ability to import the Android Lint reports.
 The idea is to visualize Android Lint errors directly in SonarQube.
 
+This plugin started out as a copy of https://github.com/ofields/sonar-android with source code converted from Java to Kotlin, and project structure converted from Maven to Gradle.
+
 ## Usage
 * Most Android projects are compiled with Gradle, so if this is the case use the [SonarQube Scanner for Gradle](https://plugins.gradle.org/plugin/org.sonarqube) to analyse your Android project
 * Tune the SonarQube quality profile by activating the Android Lint rules on which you'd like to see some issues reported into SonarQube
