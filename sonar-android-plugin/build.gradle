@@ -1,0 +1,44 @@
+apply plugin: 'kotlin'
+
+group 'no.thorbear.sonar.plugins.android'
+version '2.0'
+
+dependencies {
+    compile("com.android.tools.lint:lint:$versions.lint") { transitive = false }
+    compile("com.android.tools.lint:lint-api:$versions.lint") { transitive = false }
+    compile("com.android.tools.lint:lint-checks:$versions.lint") { transitive = false }
+    compile "com.google.guava:guava:$versions.guava"
+    compile("org.codehaus.sonar.sslr-squid-bridge:sslr-squid-bridge:$versions.sslrSquidBridge") { transitive = false }
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin"
+    compile("org.simpleframework:simple-xml:$versions.simplexml") { transitive = false }
+
+    implementation("org.codehaus.sonar:sonar-plugin-api:$versions.sonar") { transitive = false }
+    implementation("org.codehaus.sonar-plugins.java:sonar-java-plugin:$versions.sonarJava") { transitive = false }
+    implementation("org.codehaus.staxmate:staxmate:$versions.staxmate") { transitive = false }
+    implementation "org.slf4j:slf4j-api:$versions.slf4j"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    manifest {
+        attributes 'Plugin-Key': 'androidLint',
+                'Plugin-Name': 'Android Lint',
+                'Plugin-Version': "$project.version",
+                'Plugin-ChildFirstClassLoader': 'true',
+                'Plugin-Class': 'no.thorbear.sonar.plugins.android.AndroidPlugin',
+                'Plugin-Description': 'Import Android Lint reports',
+                'Plugin-Developers': 'Torbjørn Sørli',
+                'Plugin-Homepage': 'https://github.com/Thorbear/sonar-android',
+                'Plugin-IssueTrackerUrl': 'https://github.com/Thorbear/sonar-android/issues',
+                'Plugin-License': 'GNU LGPL 3',
+                'Plugin-RequirePlugins': "java:$versions.sonarJava",
+                'Plugin-SourcesUrl': 'https://github.com/Thorbear/sonar-android'
+    }
+    into("META-INF/lib") { from { configurations.compile } }
+}

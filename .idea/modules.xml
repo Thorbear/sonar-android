@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sonar-android-plugin/no.thorbear.sonar.plugins.android.sonar-android-plugin.iml" filepath="$PROJECT_DIR$/.idea/modules/sonar-android-plugin/no.thorbear.sonar.plugins.android.sonar-android-plugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sonar-android-plugin/no.thorbear.sonar.plugins.android.sonar-android-plugin.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sonar-android-plugin/no.thorbear.sonar.plugins.android.sonar-android-plugin.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sonar-android-plugin/no.thorbear.sonar.plugins.android.sonar-android-plugin.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sonar-android-plugin/no.thorbear.sonar.plugins.android.sonar-android-plugin.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sonar-android.iml" filepath="$PROJECT_DIR$/sonar-android.iml" />
+    </modules>
+  </component>
+</project>
