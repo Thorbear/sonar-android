@@ -6,7 +6,6 @@ import org.simpleframework.xml.Root
 import org.simpleframework.xml.core.Persister
 import org.slf4j.LoggerFactory
 import org.sonar.api.batch.fs.FileSystem
-import org.sonar.api.component.Component
 import org.sonar.api.component.ResourcePerspectives
 import org.sonar.api.issue.Issuable
 import org.sonar.api.profiles.RulesProfile
@@ -50,7 +49,7 @@ class AndroidLintProcessor(
         val inputFile = fileSystem.inputFile(fileSystem.predicates().hasPath(lintLocation.file!!))
         if (inputFile != null) {
             logger.debug("Processing File {} for Issue {}", lintLocation.file, lintIssue.id)
-            val issuable = perspectives.`as`(Issuable::class.java, inputFile as Component<*>)
+            val issuable = perspectives.`as`(Issuable::class.java, inputFile)
             if (issuable != null) {
                 val issue = issuable.newIssueBuilder()
                     .ruleKey(rule.rule.ruleKey())

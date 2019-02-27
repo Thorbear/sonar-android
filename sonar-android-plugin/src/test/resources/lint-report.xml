@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="3" by="lint 21.0.1">
+
+    <issue
+            id="MissingRegistered"
+            severity="Error"
+            message="Class referenced in the manifest, com.octo.appaloosasdk.async.AppaloosaSpiceService, was not found in the project or the libraries"
+            category="Correctness"
+            priority="8"
+            summary="Ensures that classes referenced in the manifest are present in the project or libraries"
+            explanation="If a class is referenced in the manifest, it must also exist in the project (or in one of the libraries included by the project. This check helps uncover typos in registration names, or attempts to rename or move classes without updating the manifest file properly."
+            url="http://developer.android.com/guide/topics/manifest/manifest-intro.html"
+            errorLine1="        &lt;service"
+            errorLine2="        ^">
+        <location
+                file="AndroidManifest.xml"
+                line="64"
+                column="9"/>
+    </issue>
+
+    <issue
+            id="ScrollViewSize"
+            severity="Warning"
+            message="This RelativeLayout should use android:layout_height=&quot;wrap_content&quot;"
+            category="Correctness"
+            priority="7"
+            summary="Checks that ScrollViews use wrap_content in scrolling dimension"
+            explanation="ScrollView children must set their `layout_width` or `layout_height` attributes to `wrap_content` rather than `fill_parent` or `match_parent` in the scrolling dimension"
+            errorLine1="        android:layout_height=&quot;match_parent&quot;"
+            errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+            quickfix="adt">
+        <location
+                file="res/layout/fragment_octodetail.xml"
+                line="9"
+                column="9"/>
+    </issue>
+
+    <issue
+            id="OldTargetApi"
+            severity="Warning"
+            message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
+            category="Correctness"
+            priority="6"
+            summary="Checks that the manifest specifies a targetSdkVersion that is recent"
+            explanation="When your application runs on a version of Android that is more recent than your `targetSdkVersion` specifies that it has been tested with, various compatibility modes kick in. This ensures that your application continues to work, but it may look out of place. For example, if the `targetSdkVersion` is less than 14, your app may get an option button in the UI.
+
+To fix this issue, set the `targetSdkVersion` to the highest available value. Then test your app to make sure everything works correctly. You may want to consult the compatibility notes to see what changes apply to each version you are adding support for: http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+            url="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html"
+            errorLine1="    &lt;uses-sdk"
+            errorLine2="    ^">
+        <location
+                file="AndroidManifest.xml"
+                line="6"
+                column="5"/>
+    </issue>
+
+    <issue
+            id="ExportedContentProvider"
+            severity="Warning"
+            message="Exported content providers can provide access to potentially sensitive data"
+            category="Security"
+            priority="5"
+            summary="Checks for exported content providers that do not require permissions"
+            explanation="Content providers are exported by default and any application on the system can potentially use them to read and write data. If the contentprovider provides access to sensitive data, it should be protected by specifying `export=false` in the manifest or by protecting it with a permission that can be granted to other applications."
+            errorLine1="        &lt;provider"
+            errorLine2="        ^">
+        <location
+                file="AndroidManifest.xml"
+                line="70"
+                column="9"/>
+    </issue>
+
+    <issue
+            id="ExportedActivity"
+            severity="Warning"
+            message="Exported activity does not require permission"
+            category="Security"
+            priority="2"
+            summary="Checks for exported activities that do not require permissions"
+            explanation="Exported activities (activities which either set `exported=true` or contain an intent-filter and do not specify `exported=false`) should define a permission that an entity must have in order to launch the activity or bind to it. Without this, any application can use this activity."
+            errorLine1="        &lt;activity"
+            errorLine2="        ^">
+        <location
+                file="AndroidManifest.xml"
+                line="35"
+                column="9"/>
+    </issue>
+
+    <issue
+            id="Overdraw"
+            severity="Warning"
+            message="Possible overdraw: Root element paints background @drawable/grey_background_pattern with a theme that also paints a background (inferred theme is @style/AppTheme)"
+            category="Performance"
+            priority="3"
+            summary="Looks for overdraw issues (where a view is painted only to be fully painted over)"
+            explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+            errorLine1="    android:background=&quot;@drawable/grey_background_pattern&quot;"
+            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+                file="res/layout-sw600dp/activity_octolist.xml"
+                line="5"
+                column="5"/>
+    </issue>
+
+    <issue
+            id="Overdraw"
+            severity="Warning"
+            message="Possible overdraw: Root element paints background @color/grey_background with a theme that also paints a background (inferred theme is @android:style/Theme_NoTitleBar)"
+            category="Performance"
+            priority="3"
+            summary="Looks for overdraw issues (where a view is painted only to be fully painted over)"
+            explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+            errorLine1="    android:background=&quot;@color/grey_background&quot;"
+            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+                file="res/layout/activity_splashscreen.xml"
+                line="5"
+                column="5"/>
+    </issue>
+
+    <issue
+            id="Overdraw"
+            severity="Warning"
+            message="Possible overdraw: Root element paints background @color/detail_background with a theme that also paints a background (inferred theme is @style/AppTheme)"
+            category="Performance"
+            priority="3"
+            summary="Looks for overdraw issues (where a view is painted only to be fully painted over)"
+            explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+            errorLine1="    android:background=&quot;@color/detail_background&quot;"
+            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+                file="res/layout-sw600dp/fragment_emptydetail.xml"
+                line="5"
+                column="5"/>
+    </issue>
+
+    <issue
+            id="Overdraw"
+            severity="Warning"
+            message="Possible overdraw: Root element paints background @color/detail_background with a theme that also paints a background (inferred theme is @style/AppTheme)"
+            category="Performance"
+            priority="3"
+            summary="Looks for overdraw issues (where a view is painted only to be fully painted over)"
+            explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+            errorLine1="    android:background=&quot;@color/detail_background&quot; >"
+            errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+                file="res/layout/fragment_octodetail.xml"
+                line="5"
+                column="5"/>
+    </issue>
+
+    <issue
+            id="UnusedResources"
+            severity="Warning"
+            message="The resource R.string.search_ettings_description appears to be unused"
+            category="Performance"
+            priority="3"
+            summary="Looks for unused resources"
+            explanation="Unused resources make applications larger and slow down builds."
+            errorLine1="    &lt;string name=&quot;search_ettings_description&quot;>Octos (AskBob)&lt;/string>"
+            errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+                file="res/values/strings.xml"
+                line="7"
+                column="13"/>
+    </issue>
+
+    <issue
+            id="IconDipSize"
+            severity="Warning"
+            message="The image grey_background_pattern_tile.png varies significantly in its density-independent (dip) size across the various density versions: drawable-mdpi/grey_background_pattern_tile.png: 6x6 dp (6x6 px), drawable-xhdpi/grey_background_pattern_tile.png: 4x4 dp (8x8 px)"
+            category="Usability:Icons"
+            priority="5"
+            summary="Ensures that icons across densities provide roughly the same density-independent size"
+            explanation="Checks the all icons which are provided in multiple densities, all compute to roughly the same density-independent pixel (`dip`) size. This catches errors where images are either placed in the wrong folder, or icons are changed to new sizes but some folders are forgotten.">
+        <location
+                file="res/drawable-xhdpi/grey_background_pattern_tile.png"/>
+        <location
+                file="res/drawable-mdpi/grey_background_pattern_tile.png"/>
+    </issue>
+
+    <issue
+            id="IconDipSize"
+            severity="Warning"
+            message="The image profile_anonymous.jpeg varies significantly in its density-independent (dip) size across the various density versions: drawable-hdpi/profile_anonymous.jpeg: 107x107 dp (160x160 px), drawable-mdpi/profile_anonymous.jpeg: 80x80 dp (80x80 px), drawable-xhdpi/profile_anonymous.jpeg: 80x80 dp (160x160 px)"
+            category="Usability:Icons"
+            priority="5"
+            summary="Ensures that icons across densities provide roughly the same density-independent size"
+            explanation="Checks the all icons which are provided in multiple densities, all compute to roughly the same density-independent pixel (`dip`) size. This catches errors where images are either placed in the wrong folder, or icons are changed to new sizes but some folders are forgotten.">
+        <location
+                file="res/drawable-xhdpi/profile_anonymous.jpeg"/>
+        <location
+                file="res/drawable-mdpi/profile_anonymous.jpeg"/>
+        <location
+                file="res/drawable-hdpi/profile_anonymous.jpeg"/>
+    </issue>
+
+    <issue
+            id="IconDipSize"
+            severity="Warning"
+            message="The image profile_anonymous_thumb.jpeg varies significantly in its density-independent (dip) size across the various density versions: drawable-mdpi/profile_anonymous_thumb.jpeg: 80x80 dp (80x80 px), drawable-hdpi/profile_anonymous_thumb.jpeg: 53x53 dp (80x80 px), drawable-xhdpi/profile_anonymous_thumb.jpeg: 40x40 dp (80x80 px)"
+            category="Usability:Icons"
+            priority="5"
+            summary="Ensures that icons across densities provide roughly the same density-independent size"
+            explanation="Checks the all icons which are provided in multiple densities, all compute to roughly the same density-independent pixel (`dip`) size. This catches errors where images are either placed in the wrong folder, or icons are changed to new sizes but some folders are forgotten.">
+        <location
+                file="res/drawable-xhdpi/profile_anonymous_thumb.jpeg"/>
+        <location
+                file="res/drawable-hdpi/profile_anonymous_thumb.jpeg"/>
+        <location
+                file="res/drawable-mdpi/profile_anonymous_thumb.jpeg"/>
+    </issue>
+
+    <issue
+            id="IconDuplicatesConfig"
+            severity="Warning"
+            message="The profile_anonymous.jpeg icon has identical contents in the following configuration folders: drawable-hdpi, drawable-xhdpi"
+            category="Usability:Icons"
+            priority="5"
+            summary="Finds icons that have identical bitmaps across various configuration parameters"
+            explanation="If an icon is provided under different configuration parameters such as `drawable-hdpi` or `-v11`, they should typically be different. This detector catches cases where the same icon is provided in different configuration folder which is usually not intentional.">
+        <location
+                file="res/drawable-xhdpi/profile_anonymous.jpeg"/>
+        <location
+                file="res/drawable-hdpi/profile_anonymous.jpeg"/>
+    </issue>
+
+    <issue
+            id="IconDensities"
+            severity="Warning"
+            message="Missing the following drawables in drawable-hdpi: background_bob.png, grey_background_pattern_tile.png"
+            category="Usability:Icons"
+            priority="4"
+            summary="Ensures that icons provide custom versions for all supported densities"
+            explanation="Icons will look best if a custom version is provided for each of the major screen density classes (low, medium, high, extra high). This lint check identifies icons which do not have complete coverage across the densities.
+
+Low density is not really used much anymore, so this check ignores the ldpi density. To force lint to include it, set the environment variable `ANDROID_LINT_INCLUDE_LDPI=true`. For more information on current density usage, see http://developer.android.com/resources/dashboard/screens.html"
+            url="http://developer.android.com/guide/practices/screens_support.html">
+        <location
+                file="res/drawable-hdpi"/>
+    </issue>
+
+    <issue
+            id="IconDensities"
+            severity="Warning"
+            message="Missing the following drawables in drawable-mdpi: background_bob.png (found in drawable-xhdpi)"
+            category="Usability:Icons"
+            priority="4"
+            summary="Ensures that icons provide custom versions for all supported densities"
+            explanation="Icons will look best if a custom version is provided for each of the major screen density classes (low, medium, high, extra high). This lint check identifies icons which do not have complete coverage across the densities.
+
+Low density is not really used much anymore, so this check ignores the ldpi density. To force lint to include it, set the environment variable `ANDROID_LINT_INCLUDE_LDPI=true`. For more information on current density usage, see http://developer.android.com/resources/dashboard/screens.html"
+            url="http://developer.android.com/guide/practices/screens_support.html">
+        <location
+                file="res/drawable-mdpi"/>
+    </issue>
+
+    <issue
+            id="IconDuplicates"
+            severity="Warning"
+            message="The following unrelated icon files have identical contents: profile_anonymous_thumb.jpeg, profile_anonymous.jpeg, profile_anonymous_thumb.jpeg, profile_anonymous_thumb.jpeg"
+            category="Usability:Icons"
+            priority="3"
+            summary="Finds duplicated icons under different names"
+            explanation="If an icon is repeated under different names, you can consolidate and just use one of the icons and delete the others to make your application smaller. However, duplicated icons usually are not intentional and can sometimes point to icons that were accidentally overwritten or accidentally not updated.">
+        <location
+                file="res/drawable-xhdpi/profile_anonymous_thumb.jpeg"/>
+        <location
+                file="res/drawable-mdpi/profile_anonymous_thumb.jpeg"/>
+        <location
+                file="res/drawable-mdpi/profile_anonymous.jpeg"/>
+        <location
+                file="res/drawable-hdpi/profile_anonymous_thumb.jpeg"/>
+    </issue>
+
+    <issue
+            id="ContentDescription"
+            severity="Warning"
+            message="[Accessibility] Missing contentDescription attribute on image"
+            category="Accessibility"
+            priority="3"
+            summary="Ensures that image widgets provide a contentDescription"
+            explanation="Non-textual widgets like ImageViews and ImageButtons should use the `contentDescription` attribute to specify a textual description of the widget such that screen readers and other accessibility tools can adequately describe the user interface."
+            errorLine1="    &lt;ImageView"
+            errorLine2="    ^"
+            quickfix="adt">
+        <location
+                file="res/layout-sw600dp/fragment_emptydetail.xml"
+                line="9"
+                column="5"/>
+    </issue>
+
+    <issue
+            id="ContentDescription"
+            severity="Warning"
+            message="[Accessibility] Missing contentDescription attribute on image"
+            category="Accessibility"
+            priority="3"
+            summary="Ensures that image widgets provide a contentDescription"
+            explanation="Non-textual widgets like ImageViews and ImageButtons should use the `contentDescription` attribute to specify a textual description of the widget such that screen readers and other accessibility tools can adequately describe the user interface."
+            errorLine1="        &lt;ImageView"
+            errorLine2="        ^"
+            quickfix="adt">
+        <location
+                file="res/layout/fragment_octodetail.xml"
+                line="12"
+                column="9"/>
+    </issue>
+
+    <issue
+            id="ContentDescription"
+            severity="Warning"
+            message="[Accessibility] Missing contentDescription attribute on image"
+            category="Accessibility"
+            priority="3"
+            summary="Ensures that image widgets provide a contentDescription"
+            explanation="Non-textual widgets like ImageViews and ImageButtons should use the `contentDescription` attribute to specify a textual description of the widget such that screen readers and other accessibility tools can adequately describe the user interface."
+            errorLine1="    &lt;ImageView"
+            errorLine2="    ^"
+            quickfix="adt">
+        <location
+                file="res/layout/view_cell_octo.xml"
+                line="8"
+                column="5"/>
+    </issue>
+
+    <issue
+            id="DefaultLocale"
+            severity="Warning"
+            message="Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead"
+            category="Correctness"
+            priority="6"
+            summary="Finds calls to locale-ambiguous String manipulation methods"
+            explanation="Calling `String#toLowerCase()` or `#toUpperCase()` *without specifying an explicit locale* is a common source of bugs. The reason for that is that those methods will use the current locale on the user&apos;s device, and even though the code appears to work correctly when you are developing the app, it will fail in some locales. For example, in the Turkish locale, the uppercase replacement for `i` is *not* `I`.
+
+If you want the methods to just perform ASCII replacement, for example to convert an enum name, call `String#toUpperCase(Locale.US)` instead. If you really want to use the current locale, call `String#toUpperCase(Locale.getDefault())` instead."
+            url="http://developer.android.com/reference/java/util/Locale.html#default_locale"
+            errorLine1="            String str = String.valueOf(result).toLowerCase();"
+            errorLine2="                                                ~~~~~~~~~~~">
+        <location
+                file="src\com\michaelnovakjr\numberpicker\NumberPicker.java"
+                line="376"
+                column="49"/>
+    </issue>
+</issues>

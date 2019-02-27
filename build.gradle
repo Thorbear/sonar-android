@@ -5,6 +5,7 @@ buildscript {
         versions.junit = '4.12'
         versions.kotlin = '1.3.21'
         versions.lint = '22.2.0'
+        versions.mockito = '1.9.5'
         versions.simplexml = '2.7.1'
         versions.slf4j = '1.7.25'
         versions.sonar = '4.5.4'

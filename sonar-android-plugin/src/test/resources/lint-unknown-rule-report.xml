@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="3" by="lint 21.0.1">
+
+    <issue
+            id="!UnknowmIssue!"
+            severity="Error"
+            message="Class referenced in the manifest, com.octo.appaloosasdk.async.AppaloosaSpiceService, was not found in the project or the libraries"
+            category="Correctness"
+            priority="8"
+            summary="Ensures that classes referenced in the manifest are present in the project or libraries"
+            explanation="If a class is referenced in the manifest, it must also exist in the project (or in one of the libraries included by the project. This check helps uncover typos in registration names, or attempts to rename or move classes without updating the manifest file properly."
+            url="http://developer.android.com/guide/topics/manifest/manifest-intro.html"
+            errorLine1="        &lt;service"
+            errorLine2="        ^">
+        <location
+                file="AndroidManifest.xml"
+                line="64"
+                column="9"/>
+    </issue>
+</issues>
