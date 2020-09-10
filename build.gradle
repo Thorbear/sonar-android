@@ -3,7 +3,7 @@ buildscript {
         versions = [:]
         versions.guava = '13.0.1'
         versions.junit = '4.13'
-        versions.kotlin = '1.3.21'
+        versions.kotlin = '1.4.10'
         versions.lint = '22.2.0'
         versions.mockito = '1.9.5'
         versions.simplexml = '2.7.1'
