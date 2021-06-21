@@ -7,7 +7,7 @@ buildscript {
         versions.lint = '22.2.0'
         versions.mockito = '1.9.5'
         versions.simplexml = '2.7.1'
-        versions.slf4j = '1.7.25'
+        versions.slf4j = '1.7.31'
         versions.sonar = '4.5.4'
         versions.sonarJava = '2.1'
         versions.sslrSquidBridge = '2.6'
